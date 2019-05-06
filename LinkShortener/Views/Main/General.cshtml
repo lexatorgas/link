@@ -1,0 +1,57 @@
+﻿@model List<Url>
+@{ Layout = "_BasicLayout";}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/MyStyle.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Url shortener</title>
+</head>
+<body>
+    @if (Model.Count == 0)
+    {
+    <h4>At the moment, the table is not displayed, because there are no values in it! Rather, add!!!</h4>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Long Url</th>
+                    <th>Short Url</th>
+                    <th>Creation Data</th>
+                    <th>Transition Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var el in Model)
+                {
+                    <tr>
+                        <td>@el.LongUrl</td>
+                        <td>@el.ShortUrl</td>
+                        <td>@el.creationData</td>
+                        <td>@el.TransitionsCount</td>
+                        <td>
+                            <form asp-action="Edit" method="get"><input value="@el.Id" name="id" type="hidden" /><button class="btn btn-primary" type="submit">Edit</button></form>
+                            <form asp-action="Delete"><input value="@el.Id" name="id" type="hidden" /><button class="btn btn-danger" type="submit">Delete</button></form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <div class="center">
+        <form asp-controller="Main" asp-action="GotoCreate">
+            <div class="form-horizontal">
+                <button class="btn btn-primary" type="submit">Shorten a new URL</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+

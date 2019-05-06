@@ -1,0 +1,21 @@
+﻿@model Url
+@{ Layout = "_BasicLayout";}
+
+<div class="jumbotron">
+    <p>Go edit your Url by @Model.Id Id</p>
+    <br />
+    <form asp-action="Edit" method="post">
+        <div class="form-horizontal">
+            <div class="input-group input-group-lg">
+                <input name="longUrl" class="form-control" value="@Model.LongUrl" />
+            </div>
+            <div class="input-group input-group-lg">
+                <input name="shortUrl" class="form-control" value="@Model.ShortUrl.Substring(25)" />
+                <input type="hidden" name="id" class="form-control" value="@Model.Id" />
+            </div>
+            <div class="center">
+                <button class="btn btn-primary" type="submit">change shortUrl</button>
+            </div>
+        </div>
+    </form>
+</div>
